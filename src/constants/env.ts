@@ -1,0 +1,1 @@
+﻿export const AUTHORIZATION_TOKEN = process.env.VITE_APP_ACCESS_TOKEN
