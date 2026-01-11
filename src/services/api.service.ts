@@ -1,5 +1,5 @@
 ﻿import axios from "axios";
-import {AUTHORIZATION_TOKEN} from "../constants/env.ts";
+import {AUTHORIZATION_TOKEN} from "@/constants/env";
 
 const axiosInstance = axios.create({
     baseURL: 'https://api.themoviedb.org',

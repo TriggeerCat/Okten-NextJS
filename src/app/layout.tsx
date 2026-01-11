@@ -4,6 +4,7 @@ import {HeaderComponent} from "@/components/Header/HeaderComponent";
 import {FooterComponent} from "@/components/Footer/FooterComponent";
 import {GenreContext} from "@/context/GenreContext";
 import {useCallback, useState} from "react";
+import "./globals.css";
 
 export default function RootLayout({children}: {
     children: React.ReactNode;
