@@ -1,1 +1,1 @@
-﻿export const AUTHORIZATION_TOKEN = process.env.VITE_APP_ACCESS_TOKEN
+﻿export const AUTHORIZATION_TOKEN = process.env.NEXT_PUBLIC_ACCESS_TOKEN

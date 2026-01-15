@@ -1,10 +1,12 @@
-﻿import {useSearchParams} from "next/navigation";
+﻿import {usePathname, useRouter, useSearchParams} from "next/navigation";
 import {useCallback, useMemo} from "react";
 import {useSearchQuery} from "@/hooks/useSearchQuery";
 
 export const usePagination = () => {
     const searchParams = useSearchParams();
     const {searchQuery} = useSearchQuery();
+    const router = useRouter();
+    const pathname = usePathname();
 
     const page = useMemo(() => {
         const queryPage = parseInt(searchParams?.get('page') ?? '1');
@@ -16,9 +18,14 @@ export const usePagination = () => {
 
     const setPage = useCallback((newPage?: number) => {
         const params = new URLSearchParams(searchParams?.toString());
+
         params.set('page', newPage ? newPage.toString() : '1');
-        params.set('search', searchQuery ?? null);
-    }, [searchQuery, searchParams])
+
+        if (searchQuery) params.set('search', searchQuery);
+        else params.delete('search');
+
+        router.replace(`${pathname}?${params.toString()}`);
+    }, [router, pathname, searchQuery, searchParams])
 
     return {page, setPage: setPage}
 }

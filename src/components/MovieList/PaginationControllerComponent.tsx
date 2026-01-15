@@ -8,7 +8,7 @@ export const PaginationControllerComponent = () => {
             <button className='size-10 border-2 border-stone-500 rounded-2xl' onClick={() => {
                 const prevPage = page - 1;
                 if (prevPage <= 0) return;
-                setPage(prevPage)
+                setPage(prevPage);
             }}>{'<'}</button>
 
             <div>{page}/500</div>

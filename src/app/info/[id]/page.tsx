@@ -12,23 +12,23 @@ import {DescriptionComponent} from "@/components/MoviePage/DescriptionComponent"
 import {DogPage} from "@/pages/DogPage";
 
 type PropsType = {
-    params: { id: string }
+    params: Promise<{ id: string }>
 }
 
-export const MoviePageLayout: FC<PropsType> = ({params}) => {
+const MoviePage: FC<PropsType> = ({params}) => {
     const [errorCheck, setErrorCheck] = useState<boolean>(false)
     const [movie, setMovie] = useState<MovieFull | null>(null)
-    const {id} = params;
 
-    const refreshMovie = async (id: string | undefined) => {
+    const refreshMovie = async (params: Promise<{ id: string }>) => {
+        const {id} = await params;
         const movie = await getOneMovie(id);
         if (movie.status === 404) setErrorCheck(true);
         else setMovie(movie);
     }
 
     useEffect(() => {
-        refreshMovie(id).then();
-    }, [id]);
+        refreshMovie(params).then();
+    }, [params]);
 
     if (movie) return (
         <div className='pt-25 mx-25 mb-3 flex gap-10 m-auto'>
@@ -43,3 +43,5 @@ export const MoviePageLayout: FC<PropsType> = ({params}) => {
     );
     else return errorCheck ? <DogPage/> : <MoviePagePreloaderPage/>;
 };
+
+export default MoviePage;

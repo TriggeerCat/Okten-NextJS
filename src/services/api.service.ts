@@ -16,7 +16,7 @@ export const getMovieList = async (page: number) => {
 }
 
 export const getMovieListBySearch = async (searchQuery: string, page?: number) => {
-    const {data} = await axiosInstance.get('/3/search/movie?include_adult=false&query=' + (searchQuery || '') + '&page=1' + (page ?? 1));
+    const {data} = await axiosInstance.get('/3/search/movie?include_adult=false&query=' + (searchQuery || '') + '&page=' + (page ?? 1));
     const {results} = data;
     return results;
 }
