@@ -1,4 +1,6 @@
-﻿import {usePagination} from "@/hooks/usePagination";
+﻿'use client'
+
+import {usePagination} from "@/hooks/usePagination";
 
 export const PaginationControllerComponent = () => {
     const { page, setPage } = usePagination();

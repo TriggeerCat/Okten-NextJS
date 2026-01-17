@@ -1,4 +1,6 @@
-﻿import {HeaderTitleComponent} from "@/components/Header/HeaderTitleComponent";
+﻿'use client'
+
+import {HeaderTitleComponent} from "@/components/Header/HeaderTitleComponent";
 import {SearchBarComponent} from "@/components/Header/SearchBarComponent";
 import {UserInfoComponent} from "@/components/Header/UserInfoComponent";
 

@@ -1,47 +1,33 @@
-﻿'use client'
-
-import {FC, useEffect, useState} from "react";
-import {getOneMovie} from "@/services/api.service";
-import {MovieFull} from "@/types/MovieFull";
+﻿import {getOneMovie} from "@/services/api.service";
 import {FullPosterComponent} from "@/components/MoviePage/FullPosterComponent";
-import {MoviePagePreloaderPage} from "@/pages/MoviePagePreloaderPage";
 import {MoviePageTitleComponent} from "@/components/MoviePage/MoviePageTitleComponent";
-import {VideoPreloader} from "@/components/Preloaders/VideoPreloader";
 import {GenreFullComponent} from "@/components/MoviePage/GenreFullComponent";
 import {DescriptionComponent} from "@/components/MoviePage/DescriptionComponent";
-import {DogPage} from "@/pages/DogPage";
+import {MovieFull} from "@/types/MovieFull";
+import {VideoPreloader} from "@/components/Preloaders/VideoPreloader";
 
-type PropsType = {
+type Props = {
     params: Promise<{ id: string }>
 }
 
-const MoviePage: FC<PropsType> = ({params}) => {
-    const [errorCheck, setErrorCheck] = useState<boolean>(false)
-    const [movie, setMovie] = useState<MovieFull | null>(null)
+export default async function MoviePage({ params }: Props) {
+    const movie: MovieFull = await getOneMovie((await params).id);
 
-    const refreshMovie = async (params: Promise<{ id: string }>) => {
-        const {id} = await params;
-        const movie = await getOneMovie(id);
-        if (movie.status === 404) setErrorCheck(true);
-        else setMovie(movie);
-    }
-
-    useEffect(() => {
-        refreshMovie(params).then();
-    }, [params]);
-
-    if (movie) return (
+    return (
         <div className='pt-25 mx-25 mb-3 flex gap-10 m-auto'>
             <FullPosterComponent movie={movie}/>
             <div className='flex flex-col gap-4 w-240'>
-                <MoviePageTitleComponent originalTitle={movie.original_title} title={movie.title}/>
+                <MoviePageTitleComponent
+                    originalTitle={movie.original_title}
+                    title={movie.title}
+                />
                 <VideoPreloader/>
                 <GenreFullComponent genres={movie.genres}/>
-                <DescriptionComponent tagline={movie.tagline} overview={movie.overview}/>
+                <DescriptionComponent
+                    tagline={movie.tagline}
+                    overview={movie.overview}
+                />
             </div>
         </div>
     );
-    else return errorCheck ? <DogPage/> : <MoviePagePreloaderPage/>;
-};
-
-export default MoviePage;
+}

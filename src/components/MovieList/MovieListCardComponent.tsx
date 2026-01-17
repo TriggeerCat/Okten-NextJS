@@ -1,4 +1,6 @@
-﻿import {MovieShortened} from "@/types/MovieShortened";
+﻿'use client'
+
+import {MovieShortened} from "@/types/MovieShortened";
 import {FC, useContext, useEffect, useState} from "react";
 import Link from "next/link";
 import {GenreContext} from "@/context/GenreContext";

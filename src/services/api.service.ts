@@ -21,16 +21,15 @@ export const getMovieListBySearch = async (searchQuery: string, page?: number) =
     return results;
 }
 
-export const getOneMovie = async (id: string | undefined) => {
-    if (id) {
-        try {
-            const {data} = await axiosInstance.get('/3/movie/' + id);
-            return data;
-        } catch (e) {
-            return e;
-        }
+export const getOneMovie = async (id: string) => {
+    try {
+        const { data } = await axiosInstance.get('/3/movie/' + id);
+        return data;
+    } catch (error) {
+        console.error('getOneMovie error:', error);
+        throw new Error('Failed to fetch movie');
     }
-}
+};
 
 export const getGenres = async () => {
     const {data} = await axiosInstance.get('/3/genre/movie/list');
