@@ -1,5 +1,4 @@
-﻿import Link from "next/link";
-import {usePagination} from "@/hooks/usePagination";
+﻿import {usePagination} from "@/hooks/usePagination";
 import {useSearchQuery} from "@/hooks/useSearchQuery";
 import {IoIosAirplane} from "react-icons/io";
 import {useState} from "react";
@@ -18,10 +17,10 @@ export const HeaderTitleComponent = () => {
 
     return (
         <div className='flex justify-between gap-50'>
-            <Link href='' onClick={onClickHandler} className='text-xl p-2'>
+            <button onClick={onClickHandler} className='text-xl p-2'>
                 <span className='text-teal-100'>TriggeerFilms</span>
                 <span className='text-yellow-100'>.ua</span>
-            </Link>
+            </button>
 
             <button onClick={toggleMenu} className='bg-red-500 rounded-xl p-2 flex justify-between items-center gap-1'>
                 <IoIosAirplane/>

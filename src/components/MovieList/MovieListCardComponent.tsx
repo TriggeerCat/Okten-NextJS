@@ -1,4 +1,4 @@
-﻿'use client'
+﻿    'use client'
 
 import {MovieShortened} from "@/types/MovieShortened";
 import {FC, useContext, useEffect, useState} from "react";

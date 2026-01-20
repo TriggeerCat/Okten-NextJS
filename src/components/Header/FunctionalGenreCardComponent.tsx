@@ -16,9 +16,7 @@ export const FunctionalGenreCardComponent: FC<PropsType> = ({genre}) => {
     }
 
     useEffect(() => {
-        if (genres.includes(genre.id)) {
-            setTint(false);
-        } else setTint(true);
+        setTint(!genres.includes(genre.id));
     }, [genre.id, genres]);
 
     return (
